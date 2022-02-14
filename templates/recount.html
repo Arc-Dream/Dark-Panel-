@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body %}
+  <table class="w3-half w3-table-all">
+
+    {% for user in users %}
+
+      <tr>
+        <th>{{user.user_id}}</th>
+        <th>{{user.user_name}}</th>
+        <th>{{user.email}}</th>
+      </tr>
+
+    {% endfor %}
+
+  </table>
+{% endblock %}
