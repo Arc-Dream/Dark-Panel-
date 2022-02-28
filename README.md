@@ -1,3 +1,5 @@
 # Dark Panel
-A clone of "Panel" database management application as a single page Python Flask remake;
+A clone of "Panel" database management application variation;
+
+It uses Python Flask as backend instead of PHP
 
