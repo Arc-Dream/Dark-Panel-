@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for
 from flask_mysqldb import MySQL
 import yaml
 
@@ -12,45 +12,71 @@ app.config['MYSQL_PASSWORD'] = db['mysql_password']
 app.config['MYSQL_USER'] = db['mysql_user']
 app.config['MYSQL_DB'] = db['mysql_db']
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
+app.secret_key = 'super secret key'
 mysql = MySQL(app)
 
-@app.route('/', methods=['GET','POST'])
+
+
+@app.route('/', methods = ['GET','POST'])
 def index():
+    menu_display = 'disabled'
 
-    if "username" in request.form:
+    if request.method == 'POST':
 
-        email = request.form['email']
-        username = request.form['username']
-        password = request.form['password']
+        user_name = request.form.get('user_name', False)
+        user_pass = request.form.get('user_pass', False)
+
 
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO py_user(user_name, password, email) VALUES (%s, %s, %s)",(username,password,email))
-        mysql.connection.commit()
+        cur.execute("SELECT * FROM py_user")
+        user = cur.fetchall()
 
-    if "link" in request.form:
-        cur = mysql.connection.cursor()
-        result_value = cur.execute("SELECT * FROM py_user")
+        for user_fetched in user:
 
-        users = cur.fetchall()
-        return render_template('recount.html', users = users)
+            if user_fetched["user_name"] == user_name and user_fetched["user_pass"] == user_pass:
+                sign_in_value = "pass"
+                session["sign_in_value"] = sign_in_value
+                return menu()
 
-    return render_template ('index.html')
+            else:
+                sign_in_value = "nopass"
+                session["sign_in_value"] = sign_in_value
+
+
+    return render_template('sign-in.html', menu_display = menu_display)
 
 
 
-@app.route('/recount', methods = ['GET', 'POST'])
+@app.route('/menu', methods = ['GET','POST'])
+def menu():
+
+    if session['sign_in_value'] == 'pass':
+        sign_in_value = 'pass'
+        return render_template('menu.html', sign_in_value = sign_in_value)
+    else:
+        return index()
+
+@app.route('/recount', methods = ['GET','POST'])
 def recount():
 
-    cur = mysql.connection.cursor()
-    result_value = cur.execute("SELECT * FROM py_user")
+    if session['sign_in_value'] == 'pass':
+        sign_in_value = 'pass'
+        return render_template('recount.html', sign_in_value = sign_in_value)
+    else:
+        return index()
 
-    users = cur.fetchall()
-    return render_template('recount.html', user = users)
 
-@app.route('/port', methods=['GET','POST'])
-def port():
+@app.route('/form', methods = ['GET','POST'])
+def form():
 
-    return render_template ('portfolio.html')
+    if session['sign_in_value'] == 'pass':
+        sign_in_value = 'pass'
+        return render_template('form.html', sign_in_value = sign_in_value)
+    else:
+        return index()
+
+
+
 
 if __name__ == '__main__':
     app.run(debug = True)
