@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block title %}Dark Panel{% endblock %}
+
 {% block body %}
 <div class="" id="main">
 
@@ -18,7 +20,7 @@
     <p>Enter Your Name and Password please</p>
     <form class="w3-third"  target="_self" method="POST">
       <p><input class="w3-input w3-padding-16" type="text" placeholder="User Name" required name="user_name"></p>
-      <p><input class="w3-input w3-padding-16" type="text" placeholder="Password" required name="user_pass"></p>
+      <p><input class="w3-input w3-padding-16" type="password" placeholder="Password" required name="user_pass"></p>
       <p class="w3-center">
         <button class="w3-button w3-light-grey w3-padding-large" type="submit" name="sign_in_submit" >
           <i class="fa fa-paper-plane"></i> SUBMIT

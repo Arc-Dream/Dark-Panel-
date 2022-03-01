@@ -1,7 +1,36 @@
 {% extends 'base.html' %}
 
+{% block title %} Data Entry {% endblock %}
+
 {% block body %}
 
-form
+<!-- Form Section -->
+<div id="Form" style="">
+
+  <div class=" w3-content w3-text-grey"
+  style="display: flex; flex-direction:column; align-items:center; justify-content: center;">
+
+    <hr style="width:200px; margin-top:80px;" class="w3-opacity">
+    <br>
+    <h2 style="margin: 10px 10px 0;">Enter the required data please</h2>
+
+    <form class="w3-third" action="" target="_blank" method="POST">
+
+      <div style="margin: 0 10px 0;">
+      <p><input class="w3-input w3-padding-8" type="text" placeholder="Name" required name="name"></p>
+      <p><input class="w3-input w3-padding-8" type="text" placeholder="Email" required name="email"></p>
+      <p><input class="w3-input w3-padding-8" type="text" placeholder="Subject" required name="subject"></p>
+      <p><input class="w3-input w3-padding-8" type="text" placeholder="Message" required name="message"></p>
+      </div>
+
+      <p class="w3-center">
+        <button class=" w3-button w3-light-grey w3-padding-large" type="submit">
+          <i class="fa fa-paper-plane"></i> SUBMIT
+        </button>
+      </p>
+    </form>
+  </div>
+</div>
+<!-- End of Form Section -->
 
 {% endblock %}

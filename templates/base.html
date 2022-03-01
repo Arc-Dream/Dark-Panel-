@@ -1,5 +1,5 @@
 <html>
-<title>W3.CSS Template</title>
+<title>{% block title %} {% endblock %}</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -28,18 +28,24 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
       <!-- Avatar image in top left corner -->
       <!-- <img src="static/pp.jpg" style="width:60%; border-radius: 50%; margin-top:20px;"> -->
-      <button class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="location.href = '{{ url_for("index") }}'" style="margin-top: 30px;">
-        <i class="fa fa-home w3-xxlarge"></i>
-        <p>FORM</p>
-      </button>
-      <button {{ menu_display }} class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="">
+
+      <!-- onclick="location.href = '{{ url_for("index") }}'" -->
+
+      <button {{ menu_display }} class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="" style="margin-top: 30px;">
         <i class="fa fa-bars w3-xxlarge "></i>
         <p>MENU</p>
       </button>
+
+      <button {{ menu_display }} class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-home w3-xxlarge"></i>
+        <p>FORM</p>
+      </button>
+
       <button  {{ menu_display }} class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="">
         <i class="fa fa-eye w3-xxlarge"></i>
         <p>RECOUNT</p>
       </button>
+
       <button  {{ menu_display }} class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="">
         <i class="fa fa-envelope w3-xxlarge"></i>
         <p>SELECTED</p>
