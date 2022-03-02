@@ -69,11 +69,31 @@ def recount():
 @app.route('/form', methods = ['GET','POST'])
 def form():
 
+    statement = "Enter the required data please"
+    form_condition = True
+
+    if request.method == "POST":
+
+        name = request.form.get('name', False)
+        email = request.form.get('email', False)
+        subject = request.form.get('subject', False)
+        message = request.form.get('message',False)
+
+
+        cur = mysql.connection.cursor()
+        cur.execute("INSERT INTO py_db_main (name, email, subject, message ) VALUES (%s, %s, %s, %s)",(name, email, subject, message))
+        mysql.connection.commit()
+        statement = "Your Message has been recorded"
+        form_condition = False
+
     if session['sign_in_value'] == 'pass':
         sign_in_value = 'pass'
-        return render_template('form.html', sign_in_value = sign_in_value)
+        return render_template('form.html', sign_in_value = sign_in_value, statement = statement, form_condition = form_condition)
     else:
         return index()
+
+
+
 
 
 
