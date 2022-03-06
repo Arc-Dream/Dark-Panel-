@@ -5,9 +5,13 @@
 {% block body %}
 
 <!-- Recount Section -->
-
+<form method="POST" action="">
 <div id="Recount" class="w3-content w3-justify w3-text-grey w3-padding-64" style="">
+
     <h2 class="w3-text-light-grey w3-center">Messages so far</h2>
+    <p class="w3-text-light-grey w3-center">Please select the ones to process</p>
+
+
     <hr style="width:100%" class="w3-opacity w3-center">
 
     <div class="w3-row w3-center w3-padding-16 w3-section w3-black w3-hide-small">
@@ -26,6 +30,10 @@
     </div>
 
 
+    <script>
+      let message_condition = [];
+    </script>
+
     {% for recount_view in recount_data %}
 
     <div style="margin-top: 50px;">
@@ -33,7 +41,7 @@
 
 
       <div class="w3-quarter w3-section">
-        <input class="w3-check w3-grayscale-max" type="checkbox" />
+        <input class="w3-check w3-grayscale-max" type="checkbox" name="form-check" value="{{ recount_view['id']}}" />
         <span class="w3-large" style="vertical-align:top;">{{ recount_view['name'] }}</span><br>
       </div>
       <div class="w3-quarter w3-section">
@@ -43,28 +51,15 @@
         <span class="w3-large">{{ recount_view['subject'] }}</span><br>
       </div>
       <div class="w3-quarter w3-section">
-        <button class="w3-large" onclick="show_message{{recount_view["id"]}}()"><i class="fa fa-download"></i> Message</button><br>
+        <button class="w3-large" onclick="show_message({{recount_view["id"]}})"><i class="fa fa-download"></i> Message</button><br>
       </div>
     </div>
 
-
-
-    <script type="text/javascript">
-        var message_condition{{recount_view["id"]}} = 0;
-
-        function show_message{{recount_view["id"]}}() {
-
-          if (message_condition{{recount_view["id"]}} == 0) {
-            document.getElementById('message{{recount_view["id"]}}').style.display = '';
-            message_condition{{recount_view["id"]}} = 1;
-          } else {
-            document.getElementById('message{{recount_view["id"]}}').style.display = 'none';
-            message_condition{{recount_view["id"]}} = 0;
-          }
-
-        }
+    <script>
+       message_condition.push([{{recount_view["id"]}}, 0]);
+       console.log (message_condition);
+       console.log ({{recount_view["id"]}});
     </script>
-
 
         <div  id="message{{ recount_view['id'] }}" class="w3-row w3-light-grey w3-section w3-center" style="margin-bottom:50px; display:none;">
             <p class="w3-large w3-third">Message:</p>
@@ -74,8 +69,39 @@
 
     {% endfor %}
 
+    <div class="w3-row w3-center w3-padding-16 w3-section">
+
+      <button class="w3-large w3-button w3-hover-light-grey  w3-block w3-center w3-grey"  type="submit" name="button"><span class="w3-xlarge">Proceed with Selected Items</span></button>
+
+    </div>
+
+    <script>
+
+
+        function show_message(ind) {
+
+          let length = message_condition.length;
+          for (let i=0; i < length +1; i++) {
+            if (message_condition[i][0] == ind) {
+
+              if (message_condition[i][1] == 0) {
+                document.getElementById(`message${ind}`).style.display = '';
+                message_condition[i][1] = 1;
+              } else {
+                document.getElementById(`message${ind}`).style.display = 'none';
+                message_condition[i][1] = 0;
+              }
+
+            }
+          }
+
+
+
+        }
+    </script>
 
 </div>
+</form>
 <!-- End of Recount Section -->
 
 {% endblock %}

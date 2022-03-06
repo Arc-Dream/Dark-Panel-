@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %} Database Test {% endblock %}
+
+{% block body %}
+
+{% for viewer in view %}
+  <p class="w3-center">{{ viewer['name'] }}</p>
+{% endfor %}
+
+{% endblock %}

@@ -58,12 +58,51 @@ def menu():
 
 @app.route('/recount', methods = ['GET','POST'])
 def recount():
+    selected_view = []
+
+    if request.method == 'POST':
+        selected = request.form.getlist('form-check')
+        for i in selected:
+            print (i)
+            selected_view.append(i)
+            print(selected_view)
+        session['selected'] = selected_view
+        return redirect(url_for('selected'))
 
     if session['sign_in_value'] == 'pass':
         sign_in_value = 'pass'
-        return render_template('recount.html', sign_in_value = sign_in_value)
+
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM py_db_main ORDER BY created_at")
+        recount_data = cur.fetchall()
+
+        # return render_template('db.test.html', view = recount_data)
+        return render_template('recount2.html', sign_in_value = sign_in_value, recount_data = recount_data)
+
     else:
         return index()
+
+
+
+
+
+
+@app.route('/selected', methods = ['GET','POST'])
+def selected():
+
+
+
+    if session['sign_in_value'] == 'pass':
+        sign_in_value = 'pass'
+        selected_view = session['selected'] 
+
+        return render_template('selected.html', sing_in_value = sign_in_value, selected_view = selected_view)
+
+    else:
+        return index()
+
+
+
 
 
 @app.route('/form', methods = ['GET','POST'])
@@ -91,10 +130,6 @@ def form():
         return render_template('form.html', sign_in_value = sign_in_value, statement = statement, form_condition = form_condition)
     else:
         return index()
-
-
-
-
 
 
 
