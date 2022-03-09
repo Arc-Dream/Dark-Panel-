@@ -63,9 +63,7 @@ def recount():
     if request.method == 'POST':
         selected = request.form.getlist('form-check')
         for i in selected:
-            print (i)
             selected_view.append(i)
-            print(selected_view)
         session['selected'] = selected_view
         return redirect(url_for('selected'))
 
@@ -90,16 +88,56 @@ def recount():
 @app.route('/selected', methods = ['GET','POST'])
 def selected():
 
+    selected_view_ult = []
 
+    if request.method == 'POST':
+        return redirect(url_for('deleted_msg'))
 
+    #Check for Session
     if session['sign_in_value'] == 'pass':
         sign_in_value = 'pass'
-        selected_view = session['selected'] 
+        selected_view = session['selected']
 
-        return render_template('selected.html', sing_in_value = sign_in_value, selected_view = selected_view)
+        #Grab the data from database
+        cur = mysql.connection.cursor()
+        cur.execute("SELECT * FROM py_db_main ORDER BY created_at")
+        recount_data = cur.fetchall()
+
+        #Select the matching data with the marked items
+        for i in selected_view:
+            for recount_data_single in recount_data:
+                if int(i) == int(recount_data_single['id']):
+                    selected_view_ult.append(recount_data_single)
+
+
+        return render_template('selected2.html', sing_in_value = sign_in_value, selected_view_ult = selected_view_ult)
 
     else:
         return index()
+
+
+@app.route('/deleted', methods=['GET','POST'])
+def deleted_msg():
+
+    if session['sign_in_value'] == 'pass':
+        sign_in_value = 'pass'
+        selected_view = session['selected']
+
+
+
+        for i in selected_view:
+            print (i)
+            cur = mysql.connection.cursor()
+            cur.execute("DELETE FROM py_db_main WHERE id = %s", (i,))
+            mysql.connection.commit()
+
+        return render_template('deleted.html')
+
+
+
+
+
+
 
 
 

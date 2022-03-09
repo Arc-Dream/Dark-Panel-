@@ -5,12 +5,21 @@
 {% block body %}
 
 <!-- Recount Section -->
-<form method="POST" action="">
+
 <div id="Recount" class="w3-content w3-justify w3-text-grey w3-padding-64" style="">
 
     <h2 class="w3-text-light-grey w3-center">Messages so far</h2>
-    <p class="w3-text-light-grey w3-center">Please select the ones to process</p>
 
+    <form method="POST">
+
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-black w3-hide-small">
+
+      <button type="submit" class="w3-center w3-large" name="delete-selected">DELETE Selected</button>
+      <!-- <button type="button" class="w3-center w3-large" name="return-recount">Return RECOUNT</button> -->
+
+    </div>
+
+    </form>
 
     <hr style="width:100%" class="w3-opacity w3-center">
 
@@ -29,51 +38,45 @@
       </div>
     </div>
 
-
     <script>
       let message_condition = [];
     </script>
 
-    {% for recount_view in recount_data %}
+
+    {% for selected_view_ult_single in selected_view_ult %}
 
     <div style="margin-top: 50px;">
     <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
 
 
       <div class="w3-quarter w3-section">
-        <input class="w3-check w3-grayscale-max" type="checkbox" name="form-check" value="{{ recount_view['id']}}" />
-        <span class="w3-large" style="vertical-align:top;">{{ recount_view['name'] }}</span><br>
+        <span class="w3-large" style="vertical-align:top;">{{ selected_view_ult_single['name'] }}</span><br>
       </div>
       <div class="w3-quarter w3-section">
-        <span class="w3-large">{{ recount_view['email'] }}</span><br>
+        <span class="w3-large">{{ selected_view_ult_single['email'] }}</span><br>
       </div>
       <div class="w3-quarter w3-section">
-        <span class="w3-large">{{ recount_view['subject'] }}</span><br>
+        <span class="w3-large">{{ selected_view_ult_single['subject'] }}</span><br>
       </div>
       <div class="w3-quarter w3-section">
-        <button class="w3-large" type="button" onclick="show_message({{recount_view["id"]}})"><i class="fa fa-download"></i> Message</button><br>
+        <button type="button" class="w3-large" onclick="show_message({{selected_view_ult_single['id']}})"><i class="fa fa-download"></i> Message</button><br>
       </div>
     </div>
 
     <script>
-       message_condition.push([{{recount_view["id"]}}, 0]);
+       message_condition.push([{{ selected_view_ult_single['id'] }}, 0]);
        console.log (message_condition);
-       console.log ({{recount_view["id"]}});
+       console.log ({{ selected_view_ult_single['id'] }});
     </script>
 
-        <div  id="message{{ recount_view['id'] }}" class="w3-row w3-light-grey w3-section w3-center" style="margin-bottom:50px; display:none;">
+        <div  id="message{{selected_view_ult_single['id']}}" class="w3-row w3-light-grey w3-section w3-center" style="margin-bottom:50px; display:none;">
             <p class="w3-large w3-third">Message:</p>
-            <p class="w3-medium  w3-twothird" style="padding-right: 20px;">{{ recount_view['message'] }}</p><br>
+            <p class="w3-medium  w3-twothird" style="padding-right: 20px;">{{ selected_view_ult_single['message'] }}</p><br>
         </div>
     </div>
 
     {% endfor %}
 
-    <div class="w3-row w3-center w3-padding-16 w3-section">
-
-      <button class="w3-large w3-button w3-hover-light-grey  w3-block w3-center w3-grey"  type="submit" name="button"><span class="w3-xlarge">Proceed with Selected Items</span></button>
-
-    </div>
 
     <script>
 
@@ -101,7 +104,7 @@
     </script>
 
 </div>
-</form>
+
 <!-- End of Recount Section -->
 
 {% endblock %}
