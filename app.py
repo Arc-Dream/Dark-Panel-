@@ -15,6 +15,9 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 app.secret_key = 'super secret key'
 mysql = MySQL(app)
 
+table = db['mysql_table']
+table_deleted = db['mysql_table_deleted']
+table_sign = db['mysql_table_sign']
 
 
 @app.route('/', methods = ['GET','POST'])
@@ -28,6 +31,7 @@ def index():
 
 
         cur = mysql.connection.cursor()
+        # cur.execute("SELECT * FROM %s", (table_sign, ))
         cur.execute("SELECT * FROM py_user")
         user = cur.fetchall()
 
@@ -128,6 +132,17 @@ def deleted_msg():
         for i in selected_view:
             print (i)
             cur = mysql.connection.cursor()
+            cur.execute("SELECT name,email,subject,message FROM py_db_main WHERE id = %s",  (i,))
+            selected_list = cur.fetchall()
+
+            for selected in selected_list:
+                name = selected['name']
+                email = selected['email']
+                subject = selected['subject']
+                message = selected['message']
+
+                cur.execute("INSERT INTO py_db_deleted (name, email, subject, message) VALUES (%s, %s, %s, %s)", (name, email, subject, message))
+
             cur.execute("DELETE FROM py_db_main WHERE id = %s", (i,))
             mysql.connection.commit()
 
