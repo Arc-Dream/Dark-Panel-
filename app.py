@@ -184,6 +184,12 @@ def form():
     else:
         return index()
 
+@app.route('/sign_out', methods = ['GET','POST'])
+def sign_out():
+    menu_display = 'disabled'
+
+    session['sign_in_value'] = ''
+    return render_template('sign_out.html', menu_display = menu_display)
 
 
 if __name__ == '__main__':

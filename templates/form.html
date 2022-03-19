@@ -32,11 +32,12 @@
           </p>
         </form>
         </div>
+
     {% else %}
 
         <div class="w3-third">
           <p class="w3-center">
-            <button class=" w3-button w3-light-grey w3-padding-large" type="button">
+            <button class="w3-button w3-light-grey w3-padding-large" onclick="location.href = '{{ url_for("menu") }}'" type="button">
               <i class="fa fa-paper-plane"></i> RETURN MENU
             </button>
           </p>
