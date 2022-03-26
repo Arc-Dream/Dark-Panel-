@@ -1,0 +1,319 @@
+<html>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.w3-row-padding img {margin-bottom: 12px}
+
+.w3-sidebar {width: 120px;background: #222;}
+
+#main {margin-left: 120px}
+
+@media only screen and (max-width: 600px) {
+
+  #main {
+    margin-left: 0
+    }
+  }
+</style>
+
+
+<script>
+      function sign_in_fail() {
+        if ( {{ session_value }} == 0) {
+          document.getElementById("sign-in-form").style.display = "none";
+        } else {
+          menu();
+        }
+      }
+
+      function menu() {
+        document.getElementById("Entry").style.display = "none";
+        document.getElementById("Form").style.display = "";
+        document.getElementById("Recount").style.display = "none";
+        document.getElementById("Precount").style.display = "none";
+        document.getElementById("Sign-out").style.display = "none";
+      }
+      function recount() {
+        document.getElementById("Entry").style.display = "none";
+        document.getElementById("Form").style.display = "none";
+        document.getElementById("Recount").style.display = "";
+        document.getElementById("Precount").style.display = "none";
+        document.getElementById("Sign-out").style.display = "none";
+      }
+      function precount() {
+        document.getElementById("Entry").style.display = "none";
+        document.getElementById("Form").style.display = "none";
+        document.getElementById("Recount").style.display = "none";
+        document.getElementById("Precount").style.display = "";
+        document.getElementById("Sign-out").style.display = "none";
+      }
+      function sign_out() {
+        document.getElementById("Entry").style.display = "none";
+        document.getElementById("Form").style.display = "none";
+        document.getElementById("Recount").style.display = "none";
+        document.getElementById("Precount").style.display = "none";
+        document.getElementById("Sign-out").style.display = "";
+      }
+</script>
+
+
+<body class="w3-black">
+
+<!-- Icon Bar (Sidebar - hidden on small screens) -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+  <!-- Avatar image in top left corner -->
+  <!-- <img src="static/pp.jpg" style="width:60%; border-radius: 50%; margin-top:20px;"> -->
+  <button class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="menu();"style="margin-top: 30px;">
+    <i class="fa fa-home w3-xxlarge"></i>
+    <p>FORM</p>
+  </button>
+  <button class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="menu();">
+    <i class="fa fa-bars w3-xxlarge "></i>
+    <p>MENU</p>
+  </button>
+  <button href="#photos" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="recount();">
+    <i class="fa fa-eye w3-xxlarge"></i>
+    <p>RECOUNT</p>
+  </button>
+  <button href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="precount();">
+    <i class="fa fa-envelope w3-xxlarge"></i>
+    <p>SELECTED</p>
+  </button>
+  <button href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black" onclick="sign_out();">
+    <i class="fa fa-close w3-xxlarge"></i>
+    <p>SIGN OUT</p>
+  </button>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#about" class="w3-bar-item w3-button" style="width:25% !important">ABOUT</a>
+    <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
+    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">CONTACT</a>
+  </div>
+</div>
+
+<!-- Page Content -->
+<div class="" id="main">
+
+
+<!-- Entry Level -->
+<div id="Entry">
+  <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
+    <h1 class="w3-jumbo"><span class="w3-hide-small"></span>Dark Panel</h1>
+    <h2 class="w3-text-light-grey">Welcome, Choose Operation</h2>
+  </header>
+
+  <div class=" w3-content w3-text-grey" id="sign-in-form" style="display: flex; flex-direction:column; align-items:center; justify-content: center;">
+
+    <hr style="width:200px" class="w3-opacity">
+    <br>
+    <p>Enter Your Name and Password please</p>
+    <!-- <p>{{ session_value }}</p> -->
+    <form class="w3-third" method="POST">
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="User Name" required name="user_name"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Password" required name="user_pass"></p>
+      <p class="w3-center">
+        <button class="w3-button w3-light-grey w3-padding-large" type="button" name="sign_in_submit" onclick="sign_in_fail();">
+          <i class="fa fa-paper-plane"></i> SUBMIT
+        </button>
+      </p>
+
+    </form>
+  </div>
+</div>
+<!-- End of Entry Level -->
+
+
+
+<!-- Form Section -->
+<div id="Form" style="display:none;">
+
+  <div class=" w3-content w3-text-grey" style="display: flex; flex-direction:column; align-items:center; justify-content: center;">
+
+    <hr style="width:200px" class="w3-opacity">
+    <br>
+    <h2>Enter the required data please</h2>
+
+    <form class="w3-half" action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Name" required name="Name"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Email" required name="Email"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Subject" required name="Subject"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message" required name="Message"></p>
+
+
+      <p class="w3-center">
+        <button class=" w3-button w3-light-grey w3-padding-large" type="submit">
+          <i class="fa fa-paper-plane"></i> SUBMIT
+        </button>
+      </p>
+    </form>
+  </div>
+</div>
+<!-- End of Form Section -->
+
+
+<!-- Recount Section -->
+<div id="Recount" class="w3-content w3-justify w3-text-grey w3-padding-64" style="display:none;">
+    <h2 class="w3-text-light-grey w3-center">Messages so far</h2>
+    <hr style="width:100%" class="w3-opacity w3-center">
+
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-black w3-hide-small">
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Name</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Email</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Subject</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Messages</span><br>
+      </div>
+    </div>
+
+    <div>
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+
+      <div class="w3-quarter w3-section">
+        <input class="w3-check w3-grayscale-max" type="checkbox" />
+        <span class="w3-large" style="vertical-align:top;">Steve Rogers</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">s@s.net</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Project content</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large"><i class="fa fa-download"></i> Click for Message</span><br>
+      </div>
+    </div>
+    <div  class="w3-row w3-light-grey w3-section w3-center" style="margin-bottom:50px; display:;">
+        <p class="w3-large w3-third">Message:</p>
+        <p class="w3-medium  w3-twothird" style="padding-right: 20px;">lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+          ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+          adipiscing elit,</p><br>
+    </div>
+  </div>
+
+  <div>
+    <div  class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Peter Parker</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">p@p.net</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Project content</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large"><i class="fa fa-download"></i> Click for Message</span><br>
+      </div>
+    </div>
+    <div class="w3-row w3-light-grey" style="margin-bottom:0px; padding-left: 10px; padding-right: 10px; display: none;">
+        <p class="w3-medium ">lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+          ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+          adipiscing elit,</p>
+    </div>
+  </div>
+</div>
+<!-- End of Recount Section -->
+
+
+<!-- Post-Recount Section -->
+<div id="Precount" class="w3-content w3-justify w3-text-grey w3-padding-64" style="display: none;">
+    <h2 class="w3-text-light-grey w3-center">Selected Messages Listed</h2>
+    <hr style="width:100%" class="w3-opacity w3-center">
+
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-black w3-hide-small">
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Name</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Email</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Subject</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Messages</span><br>
+      </div>
+    </div>
+
+    <div>
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+
+      <div class="w3-quarter w3-section">
+        <span class="w3-large" style="vertical-align:top;">Steve Rogers</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">s@s.net</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Project content</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large"><i class="fa fa-download"></i> Click for Message</span><br>
+      </div>
+    </div>
+    <div  class="w3-row w3-light-grey w3-section w3-center" style="margin-bottom:50px; display:none;">
+        <p class="w3-large w3-third">Message:</p>
+        <p class="w3-medium  w3-twothird" style="padding-right: 20px;">lorem ipsum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+          ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
+          adipiscing elit,</p><br>
+    </div>
+  </div>
+</div>
+
+<!-- Sign Out Level -->
+<div id="Sign-out" style="display: none;">
+  <header class="w3-container w3-padding-32 w3-center w3-black">
+    <h1 class="w3-jumbo"><span class="w3-hide-small"></span>Dark Panel</h1>
+    <h2 class="w3-text-light-grey">You have signed out</h2>
+  </header>
+
+  <div class=" w3-content w3-text-grey" id="contact" style="display: flex; flex-direction:column; align-items:center; justify-content: center;">
+
+    <hr style="width:200px" class="w3-opacity">
+    <br>
+    <p>Enter Your Name and Password please</p>
+
+    <form class="w3-third" action="/action_page.php" target="_blank">
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="User Name" required name="user_name"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Password" required name="user_pass"></p>
+      <p class="w3-center">
+        <button class=" w3-button w3-light-grey w3-padding-large" type="submit">
+          <i class="fa fa-paper-plane"></i> SUBMIT
+        </button>
+      </p>
+    </form>
+  </div>
+</div>
+<!-- End of Sign Out Level -->
+
+    <!-- Footer -->
+  <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
+    <p class="w3-medium">Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank" class="w3-hover-text-green">w3.css</a></p>
+  <!-- End footer -->
+  </footer>
+
+<!-- END PAGE CONTENT -->
+</div>
+
+
+
+
+
+</body>
+</html>

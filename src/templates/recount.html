@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block title %} Messages {% endblock %}
+
+{% block body %}
+
+<!-- Recount Section -->
+
+<div id="Recount" class="w3-content w3-justify w3-text-grey w3-padding-64" style="">
+    <h2 class="w3-text-light-grey w3-center">Messages so far</h2>
+    <hr style="width:100%" class="w3-opacity w3-center">
+
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-black w3-hide-small">
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Name</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Email</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Subject</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">Messages</span><br>
+      </div>
+    </div>
+
+
+    {% for recount_view in recount_data %}
+
+    <div style="margin-top: 50px;">
+    <div class="w3-row w3-center w3-padding-16 w3-section w3-light-grey">
+
+
+      <div class="w3-quarter w3-section">
+        <input class="w3-check w3-grayscale-max" type="checkbox" />
+        <span class="w3-large" style="vertical-align:top;">{{ recount_view['name'] }}</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">{{ recount_view['email'] }}</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <span class="w3-large">{{ recount_view['subject'] }}</span><br>
+      </div>
+      <div class="w3-quarter w3-section">
+        <button class="w3-large" onclick="show_message{{recount_view["id"]}}()"><i class="fa fa-download"></i> Message</button><br>
+      </div>
+    </div>
+
+
+
+    <script type="text/javascript">
+        var message_condition{{recount_view["id"]}} = 0;
+
+        function show_message{{recount_view["id"]}}() {
+
+          if (message_condition{{recount_view["id"]}} == 0) {
+            document.getElementById('message{{recount_view["id"]}}').style.display = '';
+            message_condition{{recount_view["id"]}} = 1;
+          } else {
+            document.getElementById('message{{recount_view["id"]}}').style.display = 'none';
+            message_condition{{recount_view["id"]}} = 0;
+          }
+
+        }
+    </script>
+
+
+        <div  id="message{{ recount_view['id'] }}" class="w3-row w3-light-grey w3-section w3-center" style="margin-bottom:50px; display:none;">
+            <p class="w3-large w3-third">Message:</p>
+            <p class="w3-medium  w3-twothird" style="padding-right: 20px;">{{ recount_view['message'] }}</p><br>
+        </div>
+    </div>
+
+    {% endfor %}
+
+
+</div>
+<!-- End of Recount Section -->
+
+{% endblock %}

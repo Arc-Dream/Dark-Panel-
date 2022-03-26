@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %} Selected {% endblock %}
+
+{% block body %}
+
+
+{% for selected_view_ult_single in selected_view_ult %}
+
+<p class="w3-center">{{selected_view_ult_single['id']}}</p>
+
+<p class="w3-center">{{selected_view_ult_single['name']}}</p>
+
+<p class="w3-center">{{selected_view_ult_single['email']}}</p>
+
+<p class="w3-center">{{selected_view_ult_single['subject']}}</p>
+
+<p class="w3-center">{{selected_view_ult_single['message']}}</p>
+
+<p class="w3-center">{{selected_view_ult_single['created_at']}}</p>
+
+{% endfor %}
+
+{% endblock %}

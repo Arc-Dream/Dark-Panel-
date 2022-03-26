@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Sing-Out{% endblock %}
+
+{% block body %}
+
+<div>
+
+  <div class=" w3-content w3-text-grey"
+  style="display: flex; flex-direction:column; align-items:center; justify-content: center;">
+    <h3 style="margin-top: 180px">You have been singed-out</h3>
+    <p>Thank You for Your Progress</p>
+    <p>Hope to see you again</p>
+    <button class="w3-button w3-light-grey" type="button" style="margin-top: 30px;" name="button" onclick="location.href = '{{ url_for("index") }}'">Sing-In</button>
+  </div>
+
+{% endblock %}
